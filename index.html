@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="فُلك - برنامج خاص بنادي أدب لإنشاء تذاكر إبداعية">
+    <title>فُلك | تذكرة الإبداع</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="logo.png">
+</head>
+<body>
+    <div class="stars-container"></div>
+    <div class="gradient-bg"></div>
+    
+    <div class="container">
+        <h1>أهلاً أهلا بالسنمائيين</h1>
+        <p class="subtitle">قص تذكرتك السنمائية</p>
+    </div>
+    
+    <div class="input-container glass-card">
+        <div class="input-group">
+            <input type="text" id="name" placeholder="اكتب أسمك هنا..." autocomplete="off">
+            <i class="fas fa-pen"></i>
+        </div>
+    </div>
+    
+    <div class="canvas-container glass-card">
+        <canvas id="ticket-canvas"></canvas>
+    </div>
+    
+    <div class="actions">
+        <button id="download-btn" class="btn primary">
+            <i class="fas fa-download"></i> قص التذكرة
+        </button>
+        <button id="share-btn" class="btn secondary">
+            <i class="fas fa-share-alt"></i> مشاركة
+        </button>
+    </div>
+    
+    <footer class="glass-card">
+        <div class="footer-content">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p class="copyright"> جميع الحقوق محفوظة لنادي أدِيب   2025 ©</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="main.js"></script>
+</body>
+</html>

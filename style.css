@@ -1,0 +1,286 @@
+:root {
+    --primary: #712737;
+    --secondary: #843848;
+    --dark: #06283D;
+    --light: #FFFFFF;
+    --glass: rgba(255, 255, 255, 0.1);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'OurFont', Arial, sans-serif;
+}
+
+@font-face {
+    font-family: 'OurFont';
+    src: url('./fonts/COMM\ -\ Lyon\ Arabic\ Display\ Light.otf');
+}
+
+@font-face {
+    font-family: 'OurFont';
+    src: url('./fonts/COMM\ -\ Lyon\ Arabic\ Display\ Regular.otf');
+}
+
+@font-face {
+    font-family: 'OurFont';
+    src: url('./fonts/COMM\ -\ Lyon\ Arabic\ Display\ Medium.otf');
+}
+
+@font-face {
+    font-family: 'OurFont';
+    src: url('./fonts/COMM\ -\ Lyon\ Arabic\ Display\ Bold.otf');
+}
+
+@font-face {
+    font-family: 'OurFont';
+    src: url('./fonts/COMM\ -\ Lyon\ Arabic\ Display\ Black.otf');
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--light);
+}
+
+/* الخلفية المتدرجة */
+.gradient-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 50%, var(--secondary) 100%);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    z-index: -2;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* النجوم المتحركة */
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 5s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+/* التصميم الزجاجي */
+.glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 90%;
+}
+
+/* العناصر الرئيسية */
+.container {
+    text-align: center;
+    padding: 40px 20px 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.multi-text {
+    color: var(--secondary);
+}
+
+/* حقل الإدخال */
+.input-container {
+    max-width: 500px;
+}
+
+.input-group {
+    position: relative;
+}
+
+input {
+    width: 100%;
+    padding: 15px 50px 15px 20px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--dark);
+    font-size: 1.2rem;
+    text-align: right;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+/* منطقة التذكرة */
+.canvas-container {
+    max-width: 800px;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+/* الأزرار */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.primary {
+    background: var(--light);
+    color: var(--primary);
+}
+
+.secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--light);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* التذييل */
+footer {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+    margin: 15px 0;
+    font-size: 1.5rem;
+}
+
+.social-icons a {
+    color: var(--light);
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--secondary);
+    transform: translateY(-3px);
+}
+
+.copyright {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* التأثيرات عند النقر */
+@keyframes click-effect {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+/* responsive design */
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    .subtitle { font-size: 1rem; }
+    input { font-size: 1rem; padding: 12px 45px 12px 15px; }
+    .btn { font-size: 1rem; padding: 10px 20px; }
+}
+
+/* تأثير النقر */
+.click-effect {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%) scale(1);
+    animation: click-effect 1s ease-out forwards;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* تنبيه مخصص */
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 1000;
+    animation: fadeInOut 3s ease forwards;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    10%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
