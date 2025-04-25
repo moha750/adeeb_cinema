@@ -136,7 +136,7 @@ input {
     border: none;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.9);
-    color: var(--dark);
+    color: var(--primary);
     font-size: 1.2rem;
     text-align: right;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);

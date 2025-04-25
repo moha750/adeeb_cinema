@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function resizeCanvas() {
         const container = document.querySelector('.canvas-container');
         canvas.width = container.offsetWidth;
-        canvas.height = (container.offsetWidth * 308) / 766; // نسبة الأبعاد الأصلية
+        canvas.height = (container.offsetWidth * 310) / 866; // نسبة الأبعاد الأصلية
     }
     
     function drawTicket() {
@@ -131,12 +131,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // إضافة النص
         ctx.font = `${canvas.width / 30}px OurFont`;
-        ctx.fillStyle = '#ffffff';
+        ctx.fillStyle = '#652332';
         ctx.textAlign = 'center';
         
         const name = nameInput.value || "أسمك هنا";
-        const x = canvas.width * 0.49;
-        const y = canvas.height * 0.67;
+        const x = canvas.width * 0.47;
+        const y = canvas.height * 0.46;
         
         ctx.fillText(name, x, y);
     }
