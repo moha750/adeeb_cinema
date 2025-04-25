@@ -13,20 +13,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const siteUrl = 'https://moha750.github.io/adeeb_cinema/';
     
     // تحميل صورة التذكرة
-    const ticketImg = new Image();
-    ticketImg.src = 'certificate.png';
+	const ticketImg = new Image();
+	ticketImg.src = 'certificate.png';
     
-    ticketImg.onload = function() {
-        // ضبط أبعاد الكانفاس
-        resizeCanvas();
-        drawTicket();
-    };
+	ticketImg.onload = function() {
+		// اضبط أبعاد الكانفاس نفس أبعاد الصورة الأصلية
+		canvas.width = ticketImg.naturalWidth; // 1918
+		canvas.height = ticketImg.naturalHeight; // 530
+	
+		// العرض الظاهري مرن
+		canvas.style.width = '100%';
+		canvas.style.height = 'auto';
+	
+		drawTicket();
+	};
     
     // تغيير حجم الكانفاس عند تغيير حجم النافذة
-    window.addEventListener('resize', function() {
-        resizeCanvas();
-        drawTicket();
-    });
+	window.addEventListener('resize', function() {
+		// فقط ضبط العرض الظاهري بدون لمس الأبعاد الداخلية
+		canvas.style.width = '100%';
+		canvas.style.height = 'auto';
+	});
     
     // تحديث التذكرة عند الكتابة
     nameInput.addEventListener('input', drawTicket);
@@ -40,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         const link = document.createElement('a');
-        link.download = `تذكرة-${nameInput.value}.png`;
+        link.download = `تذكرتي السنمائية.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
         
@@ -130,21 +137,22 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 	
     
-    function drawTicket() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(ticketImg, 0, 0, canvas.width, canvas.height);
-        
-        // إضافة النص
-        ctx.font = `${canvas.width / 30}px OurFont`;
-        ctx.fillStyle = '#652332';
-        ctx.textAlign = 'center';
-        
-        const name = nameInput.value || "أسمك هنا";
-        const x = canvas.width * 0.47;
-        const y = canvas.height * 0.45;
-        
-        ctx.fillText(name, x, y);
-    }
+	function drawTicket() {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(ticketImg, 0, 0, canvas.width, canvas.height);
+	
+		// إضافة النص
+		ctx.font = `${canvas.width / 25}px OurFont`; // خط أوضح لأن الصورة حجمها كبير
+		ctx.fillStyle = '#652332';
+		ctx.textAlign = 'center';
+	
+		const name = nameInput.value || "أسمك هنا";
+		const x = canvas.width * 0.47;
+		const y = canvas.height * 0.5;
+	
+		ctx.fillText(name, x, y);
+	}
+	
     
     function shareOnPlatform(platform) {
         const name = nameInput.value.trim() || "مستخدم";
