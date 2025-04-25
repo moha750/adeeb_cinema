@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const nameInput = document.getElementById('name');
     const downloadBtn = document.getElementById('download-btn');
     const shareBtn = document.getElementById('share-btn');
+    const shareModal = document.getElementById('share-modal');
+    const closeModal = document.querySelector('.close');
+    const siteUrl = 'https://moha750.github.io/adeeb_cinema/';
     
     // تحميل صورة التذكرة
     const ticketImg = new Image();
@@ -29,14 +32,61 @@ document.addEventListener('DOMContentLoaded', function() {
     nameInput.addEventListener('input', drawTicket);
     
     // زر التحميل
-    downloadBtn.addEventListener('click', downloadTicket);
+    downloadBtn.addEventListener('click', function() {
+        if (!nameInput.value.trim()) {
+            showAlert('الرجاء إدخال اسمك أولاً');
+            nameInput.focus();
+            return;
+        }
+        
+        const link = document.createElement('a');
+        link.download = `تذكرة-${nameInput.value}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        
+        // عرض نافذة المشاركة بعد التنزيل
+        setTimeout(() => {
+            shareModal.style.display = 'block';
+        }, 1000);
+    });
     
-    // زر المشاركة
-    if (navigator.share) {
-        shareBtn.addEventListener('click', shareTicket);
-    } else {
-        shareBtn.style.display = 'none';
-    }
+    // زر نسخ الرابط
+    shareBtn.addEventListener('click', function() {
+        copyToClipboard(siteUrl);
+        showAlert('تم نسخ رابط الموقع إلى الحافظة!');
+    });
+    
+    // إعداد أزرار المشاركة
+    document.getElementById('twitter-share').addEventListener('click', function(e) {
+        e.preventDefault();
+        shareOnPlatform('twitter');
+    });
+    
+    document.getElementById('whatsapp-share').addEventListener('click', function(e) {
+        e.preventDefault();
+        shareOnPlatform('whatsapp');
+    });
+    
+    document.getElementById('telegram-share').addEventListener('click', function(e) {
+        e.preventDefault();
+        shareOnPlatform('telegram');
+    });
+    
+    document.getElementById('facebook-share').addEventListener('click', function(e) {
+        e.preventDefault();
+        shareOnPlatform('facebook');
+    });
+    
+    // إغلاق النافذة المنبثقة
+    closeModal.addEventListener('click', function() {
+        shareModal.style.display = 'none';
+    });
+    
+    window.addEventListener('click', function(event) {
+        if (event.target === shareModal) {
+            shareModal.style.display = 'none';
+        }
+    });
     
     // تأثير النقر
     document.addEventListener('click', function(e) {
@@ -91,30 +141,40 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillText(name, x, y);
     }
     
-    function downloadTicket() {
-        if (!nameInput.value.trim()) {
-            showAlert('الرجاء إدخال اسمك أولاً');
-            nameInput.focus();
-            return;
+    function shareOnPlatform(platform) {
+        const name = nameInput.value.trim() || "مستخدم";
+        const text = `تذكرتي الإبداعية - ${name}\nانشئ تذكرتك الإبداعية مع فُلك`;
+        
+        switch(platform) {
+            case 'twitter':
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(siteUrl)}`, '_blank');
+                break;
+            case 'whatsapp':
+                window.open(`https://wa.me/?text=${encodeURIComponent(text + '\n' + siteUrl)}`, '_blank');
+                break;
+            case 'telegram':
+                window.open(`https://t.me/share/url?url=${encodeURIComponent(siteUrl)}&text=${encodeURIComponent(text)}`, '_blank');
+                break;
+            case 'facebook':
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(siteUrl)}`, '_blank');
+                break;
         }
         
-        const link = document.createElement('a');
-        link.download = `تذكرة-${nameInput.value}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
+        shareModal.style.display = 'none';
     }
     
-    async function shareTicket() {
+    async function copyToClipboard(text) {
         try {
-            await navigator.share({
-                title: `تذكرتي الإبداعية - ${nameInput.value || 'مبدع'}`,
-                text: 'انشئ تذكرتك الإبداعية مع فُلك',
-                url: window.location.href
-            });
+            await navigator.clipboard.writeText(text);
         } catch (err) {
-            console.log('مشاركة ملغاة:', err);
-            copyToClipboard(window.location.href);
-            showAlert('تم نسخ الرابط إلى الحافظة!');
+            console.error('Failed to copy: ', err);
+            // Fallback for older browsers
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
         }
     }
     
@@ -128,10 +188,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             effect.remove();
         }, 1000);
-    }
-    
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text);
     }
     
     function showAlert(message) {
