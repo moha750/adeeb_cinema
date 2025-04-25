@@ -119,11 +119,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    function resizeCanvas() {
-        const container = document.querySelector('.canvas-container');
-        canvas.width = container.offsetWidth;
-        canvas.height = (container.offsetWidth * 310) / 866; // نسبة الأبعاد الأصلية
-    }
+	function resizeCanvas() {
+		// دائما خله عالي الدقة
+		canvas.width = 2000;   // مثلا عرض التذكرة بجودة عالية
+		canvas.height = (2000 * 310) / 866;  // حافظ على النسبة الأصلية للصورة
+	
+		// العرض في الشاشة يخليه بالـ CSS فقط
+		canvas.style.width = '100%';
+		canvas.style.height = 'auto';
+	}
+	
     
     function drawTicket() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
