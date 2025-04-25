@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const name = nameInput.value || "أسمك هنا";
         const x = canvas.width * 0.47;
-        const y = canvas.height * 0.46;
+        const y = canvas.height * 0.45;
         
         ctx.fillText(name, x, y);
     }

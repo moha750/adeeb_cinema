@@ -168,6 +168,10 @@ canvas {
     height: auto;
     border-radius: 10px;
     display: block;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
 }
 
 /* الأزرار */
